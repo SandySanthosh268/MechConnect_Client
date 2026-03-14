@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { login, getProfile } from '../../services/api';
-import { useAuth } from '../../contexts/AuthContext';
-import Toast from '../../components/Toast';
+import { login, getProfile } from '../../services/userService';
+import { useAuth } from '../../context/AuthContext';
+import Notification from '../../components/ui/Notification';
 import { Button, Card } from '../../components/ui';
 import { Mail, Lock, LogIn, Wrench, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -42,7 +42,7 @@ export default function Login() {
       <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-secondary/10 rounded-full blur-3xl pointer-events-none"></div>
 
-      {toast && <Toast {...toast} onClose={() => setToast(null)} />}
+      {toast && <Notification {...toast} onClose={() => setToast(null)} />}
       
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
         <motion.div 

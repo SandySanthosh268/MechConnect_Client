@@ -1,16 +1,13 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../../context/AuthContext';
+import Loader from './Loader';
 
 export default function ProtectedRoute({ children, allowedRoles }) {
   const { isAuthenticated, role, loading } = useAuth();
 
   if (loading) {
-    return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
-        <div className="spinner" />
-      </div>
-    );
+    return <Loader fullPage={true} />;
   }
 
   if (!isAuthenticated) return <Navigate to="/login" replace />;

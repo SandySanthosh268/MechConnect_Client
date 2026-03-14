@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import { 
   LayoutDashboard, 
   Search, 
@@ -11,7 +11,11 @@ import {
   User,
   Wrench,
   CreditCard,
-  X
+  X,
+  Star,
+  Users,
+  BarChart3,
+  Calendar
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -28,30 +32,32 @@ export function Sidebar({ isOpen, onClose, role }) {
   const getLinks = () => {
     if (role === 'ROLE_CUSTOMER') return [
       { to: '/customer', icon: LayoutDashboard, label: 'Dashboard', end: true },
-      { to: '/customer/vehicles', icon: Car, label: 'My Vehicles' },
-      { to: '/customer/mechanics', icon: Search, label: 'Find Mechanics' },
-      { to: '/customer/bookings', icon: ClipboardList, label: 'My Bookings' },
+      { to: '/customer/mechanics', icon: Search, label: 'Search Mechanics' },
+      { to: '/customer/booking-history', icon: ClipboardList, label: 'Booking History' },
+      { to: '/customer/vehicles', icon: Car, label: 'Vehicle Management' },
+      { to: '/customer/profile', icon: User, label: 'My Profile' },
     ];
     if (role === 'ROLE_MECHANIC') return [
       { to: '/mechanic', icon: LayoutDashboard, label: 'Dashboard', end: true },
-      { to: '/mechanic/services', icon: Wrench, label: 'My Services' },
-      { to: '/mechanic/bookings', icon: ClipboardList, label: 'Bookings' },
-      { to: '/mechanic/profile', icon: User, label: 'Profile' },
+      { to: '/mechanic/booking-requests', icon: ClipboardList, label: 'Booking Requests' },
+      { to: '/mechanic/services', icon: Wrench, label: 'Service Management' },
+      { to: '/mechanic/profile', icon: User, label: 'Workshop Profile' },
+      { to: '/mechanic/ratings-feedback', icon: Star, label: 'Ratings & Feedback' },
     ];
     if (role === 'ROLE_ADMIN') return [
       { to: '/admin', icon: LayoutDashboard, label: 'Dashboard', end: true },
+      { to: '/admin/users', icon: Users, label: 'Manage Users' },
       { to: '/admin/mechanics', icon: Wrench, label: 'Manage Mechanics' },
-      { to: '/admin/customers', icon: User, label: 'Customers' },
+      { to: '/admin/booking-monitoring', icon: Search, label: 'Booking Monitoring' },
+      { to: '/admin/system-analytics', icon: BarChart3, label: 'System Analytics' },
     ];
     return [];
   };
 
-  const links = [...getLinks()
-    // { to: '/settings', icon: Settings, label: 'Settings' }
-  ];
+  const links = getLinks();
 
   const SidebarContent = () => (
-    <div className="flex flex-col h-full bg-slate-900 text-slate-300">
+    <div className="flex flex-col h-full bg-slate-900 text-slate-400">
       <div className="p-6 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-light to-primary-dark flex items-center justify-center text-white shadow-lg">
@@ -64,7 +70,7 @@ export function Sidebar({ isOpen, onClose, role }) {
             </div>
           </div>
         </div>
-        <button onClick={onClose} className="lg:hidden p-2 hover:bg-slate-800 rounded-lg transition-colors">
+        <button onClick={onClose} className="lg:hidden p-2 hover:bg-slate-800 rounded-lg transition-colors text-slate-400">
           <X size={20} />
         </button>
       </div>
@@ -91,7 +97,7 @@ export function Sidebar({ isOpen, onClose, role }) {
 
       <div className="p-4 mt-auto border-t border-slate-800 bg-slate-900/50">
         <div className="flex items-center gap-3 p-3 mb-2 rounded-xl bg-slate-800/30">
-          <div className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-slate-400 border border-slate-600">
+          <div className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-slate-400 border border-slate-600 shrink-0">
             <User size={20} />
           </div>
           <div className="flex-1 overflow-hidden">
@@ -101,7 +107,7 @@ export function Sidebar({ isOpen, onClose, role }) {
         </div>
         <button 
           onClick={handleLogout}
-          className="flex items-center gap-3 w-full px-4 py-3 rounded-xl font-medium text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-all duration-200"
+          className="flex items-center gap-3 w-full px-4 py-3 rounded-xl font-semibold text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-all duration-200"
         >
           <LogOut size={20} strokeWidth={2} />
           <span>Logout</span>
@@ -112,7 +118,6 @@ export function Sidebar({ isOpen, onClose, role }) {
 
   return (
     <>
-      {/* Mobile Drawer */}
       <AnimatePresence>
         {isOpen && (
           <div className="lg:hidden fixed inset-0 z-[100]">
@@ -136,7 +141,6 @@ export function Sidebar({ isOpen, onClose, role }) {
         )}
       </AnimatePresence>
 
-      {/* Desktop Sidebar */}
       <div className="hidden lg:block fixed top-0 left-0 bottom-0 w-[280px] border-r border-slate-800 z-40">
         <SidebarContent />
       </div>

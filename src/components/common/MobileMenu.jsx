@@ -1,19 +1,24 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, Search, ClipboardList, User } from 'lucide-react';
+import { Home, Search, ClipboardList, User, Wrench, BarChart3, Calendar } from 'lucide-react';
 
-export function BottomNav({ role }) {
+export function MobileMenu({ role }) {
   const getLinks = () => {
     if (role === 'ROLE_CUSTOMER') return [
       { to: '/customer', icon: Home, label: 'Home', end: true },
       { to: '/customer/mechanics', icon: Search, label: 'Search' },
-      { to: '/customer/bookings', icon: ClipboardList, label: 'Bookings' },
-      { to: '/customer/vehicles', icon: User, label: 'Profile' },
+      { to: '/customer/booking-history', icon: Calendar, label: 'Bookings' },
+      { to: '/customer/vehicles', icon: User, label: 'Vehicles' },
     ];
     if (role === 'ROLE_MECHANIC') return [
       { to: '/mechanic', icon: Home, label: 'Home', end: true },
-      { to: '/mechanic/bookings', icon: ClipboardList, label: 'Requests' },
+      { to: '/mechanic/booking-requests', icon: ClipboardList, label: 'Jobs' },
       { to: '/mechanic/profile', icon: User, label: 'Profile' },
+    ];
+    if (role === 'ROLE_ADMIN') return [
+      { to: '/admin', icon: Home, label: 'Stats', end: true },
+      { to: '/admin/mechanics', icon: Wrench, label: 'Mechanics' },
+      { to: '/admin/system-analytics', icon: BarChart3, label: 'Analytics' },
     ];
     return [];
   };
@@ -30,7 +35,7 @@ export function BottomNav({ role }) {
           end={link.end}
           className={({ isActive }) => `
             flex flex-col items-center gap-1 min-w-[64px] transition-colors
-            ${isActive ? 'text-primary' : 'text-slate-400 dark:text-slate-500'}
+            ${isActive ? 'text-primary' : 'text-slate-500 dark:text-slate-400'}
           `}
         >
           {({ isActive }) => (

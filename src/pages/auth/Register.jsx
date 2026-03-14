@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { register } from '../../services/api';
-import Toast from '../../components/Toast';
+import { register } from '../../services/userService';
+import Notification from '../../components/ui/Notification';
 import { Button, Card } from '../../components/ui';
 import { Mail, Lock, User, Phone, MapPin, Wrench, ArrowRight, ArrowLeft } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -44,7 +44,7 @@ export default function Register() {
       <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-secondary/10 rounded-full blur-3xl pointer-events-none"></div>
 
-      {toast && <Toast {...toast} onClose={() => setToast(null)} />}
+      {toast && <Notification {...toast} onClose={() => setToast(null)} />}
       
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
         <motion.div 
