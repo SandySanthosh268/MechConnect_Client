@@ -4,7 +4,7 @@ import { Client } from '@stomp/stompjs';
 let stompClient = null;
 
 export const connectWebSocket = (onMessageReceived) => {
-  const socket = new SockJS('http://localhost:8080/ws');
+  const socket = new SockJS('https://mechconnect-server.onrender.com/ws');
   stompClient = new Client({
     webSocketFactory: () => socket,
     debug: (str) => console.log(str),
