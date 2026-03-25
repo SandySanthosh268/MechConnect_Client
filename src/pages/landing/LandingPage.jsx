@@ -1,23 +1,19 @@
-import React from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { 
-  ChevronRight, 
-  Search, 
-  Calendar, 
-  MapPin, 
-  CheckCircle2, 
-  ShieldCheck, 
-  Clock, 
-  Truck, 
-  Star,
-  Users,
-  Wrench,
-  Bike,
-  Car
-} from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Button, Card } from '../../components/ui';
+import {
+  Bike,
+  Calendar,
+  Car,
+  CheckCircle2,
+  ChevronRight,
+  Clock,
+  Search,
+  ShieldCheck,
+  Star,
+  Wrench
+} from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Footer } from '../../components/common/Footer';
+import { Button } from '../../components/ui';
 
 // Realistic Unsplash placeholders for landing page visuals
 const HERO_IMAGE = "/assets/hero.png";
@@ -55,10 +51,8 @@ export default function LandingPage() {
     <div className="bg-background min-h-screen font-sans selection:bg-primary/20">
       {/* Public Navbar */}
       <nav className="nav-blur h-20 px-6 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-lg">
-            <Wrench size={20} strokeWidth={2.5} />
-          </div>
+        <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/')}>
+          <img src="/logo.png" alt="MechConnect Logo" className="w-10 h-10 rounded-xl shadow-lg object-cover" />
           <span className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter">MechConnect</span>
         </div>
         <div className="hidden md:flex items-center gap-8">

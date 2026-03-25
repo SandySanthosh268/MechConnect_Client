@@ -9,9 +9,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white">
-                <Wrench size={16} strokeWidth={2.5} />
-              </div>
+              <img src="/logo.png" alt="MechConnect Logo" className="w-8 h-8 rounded-lg shadow-sm object-cover" />
               <span className="text-xl font-black text-slate-900 tracking-tighter">MechConnect</span>
             </div>
             <p className="text-slate-600 text-sm leading-relaxed mb-6">
